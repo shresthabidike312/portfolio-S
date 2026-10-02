@@ -1,0 +1,648 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  --navy: #16384f;
+  --navy-light: #1d4b67;
+  --gold: #c9a24a;
+
+  --paper: #f6f8fb;
+  --text: #173042;
+  --muted: #637686;
+
+  --line: rgba(22, 56, 79, 0.11);
+  --card: #ffffff;
+
+  --white: #ffffff;
+
+  --radius-card: 20px;
+  --radius-button: 14px;
+  --radius-navbar: 18px;
+
+  --shadow-soft:
+    0 8px 30px rgba(22, 56, 79, 0.08);
+
+  --shadow-card:
+    0 18px 60px rgba(22, 56, 79, 0.08);
+
+  --shadow-navbar:
+    0 12px 40px rgba(22, 56, 79, 0.12);
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+.dark {
+  --paper: #0b1a26;
+  --text: #edf5f8;
+  --muted: #a9bac6;
+
+  --line: rgba(255, 255, 255, 0.1);
+  --card: #102737;
+
+  --navy: #16384f;
+  --navy-light: #214f6a;
+
+  --shadow-soft:
+    0 8px 30px rgba(0, 0, 0, 0.2);
+
+  --shadow-card:
+    0 18px 60px rgba(0, 0, 0, 0.22);
+
+  --shadow-navbar:
+    0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+
+  background: var(--paper);
+  color: var(--text);
+
+  /*
+    IMPORTANT:
+    Mona Sans was replaced with Manrope
+    in app/layout.tsx.
+  */
+  font-family:
+    var(--font-manrope),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  line-height: 1.6;
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.display {
+  font-family:
+    var(--font-playfair),
+    Georgia,
+    serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* =========================================================
+   LINKS / BUTTONS / FORMS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 3px solid rgba(201, 162, 74, 0.75);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+
+  left: 12px;
+  top: -60px;
+
+  z-index: 100;
+
+  background: var(--navy);
+  color: #ffffff;
+
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container-site {
+  width: min(
+    1200px,
+    calc(100% - 32px)
+  );
+
+  margin-inline: auto;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.section {
+  padding: 96px 0;
+}
+
+/* =========================================================
+   HERO / GRID BACKGROUND
+   ========================================================= */
+
+.grid-glow {
+  background-image:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(122, 157, 255, 0.12),
+      transparent 26rem
+    ),
+    radial-gradient(
+      rgba(22, 56, 79, 0.08) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    auto,
+    20px 20px;
+
+  background-position:
+    center,
+    center;
+}
+
+.dark .grid-glow {
+  background-image:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(69, 125, 173, 0.12),
+      transparent 26rem
+    ),
+    radial-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card-ui {
+  background: var(--card);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius-card);
+
+  box-shadow: var(--shadow-card);
+}
+
+.dark .card-ui {
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================================================
+   GOLD PROFILE RING
+   ========================================================= */
+
+.gold-ring {
+  box-shadow:
+    0 0 0 5px rgba(201, 162, 74, 0.12),
+    0 18px 55px rgba(22, 56, 79, 0.17);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.nav-shadow {
+  box-shadow: var(--shadow-navbar);
+}
+
+/*
+  Compact navigation links.
+
+  The previous version used too much horizontal
+  padding, which made the navbar look stretched.
+*/
+
+.nav-link {
+  position: relative;
+
+  display: inline-flex;
+
+  height: 36px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 9px;
+
+  margin: 0;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  color: #64748b;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.nav-link:hover {
+  color: var(--navy);
+
+  background:
+    rgba(22, 56, 79, 0.045);
+}
+
+.nav-link:active {
+  transform: translateY(1px);
+}
+
+.dark .nav-link {
+  color: #cbd5e1;
+}
+
+.dark .nav-link:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================
+   NAVBAR GROUPS
+   ========================================================= */
+
+.nav-links {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1px;
+
+  white-space: nowrap;
+}
+
+.nav-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   SMALL NAV ICON BUTTONS
+   ========================================================= */
+
+.nav-icon-button {
+  display: inline-flex;
+
+  width: 36px;
+  height: 36px;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--line);
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: var(--navy);
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-icon-button:hover {
+  transform: translateY(-1px);
+
+  background: rgba(22, 56, 79, 0.05);
+
+  border-color:
+    rgba(22, 56, 79, 0.2);
+}
+
+.dark .nav-icon-button {
+  color: #ffffff;
+
+  border-color:
+    rgba(255, 255, 255, 0.1);
+}
+
+.dark .nav-icon-button:hover {
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================
+   HIRE ME BUTTON
+   ========================================================= */
+
+.nav-hire-button {
+  display: inline-flex;
+
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  flex-shrink: 0;
+
+  margin-left: 2px;
+
+  padding: 0 15px;
+
+  border-radius: 11px;
+
+  background: var(--navy);
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  box-shadow:
+    0 4px 12px rgba(22, 56, 79, 0.18);
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-hire-button:hover {
+  background: var(--navy-light);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(22, 56, 79, 0.22);
+}
+
+.nav-hire-button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   MORE DROPDOWN
+   ========================================================= */
+
+.nav-more-button {
+  display: inline-flex;
+
+  height: 36px;
+
+  align-items: center;
+
+  gap: 3px;
+
+  padding: 0 8px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.nav-more-button:hover {
+  color: var(--navy);
+
+  background:
+    rgba(22, 56, 79, 0.045);
+}
+
+.dark .nav-more-button {
+  color: #cbd5e1;
+}
+
+.dark .nav-more-button:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .container-site {
+    width: min(
+      100% - 24px,
+      1200px
+    );
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .nav-link {
+    padding-left: 7px;
+    padding-right: 7px;
+
+    font-size: 13px;
+  }
+
+  .nav-more-button {
+    padding-left: 6px;
+    padding-right: 6px;
+
+    font-size: 13px;
+  }
+
+  .nav-hire-button {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+  .nav-link {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+  .no-print,
+  nav,
+  footer,
+  #gallery,
+  #connect,
+  .back-top,
+  .scroll-progress {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .section {
+    padding: 30px 0;
+  }
+
+  .card-ui {
+    box-shadow: none;
+    border: 1px solid #dddddd;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: rgba(201, 162, 74, 0.3);
+  color: var(--text);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    rgba(22, 56, 79, 0.25);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(22, 56, 79, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background:
+    rgba(255, 255, 255, 0.2);
+}

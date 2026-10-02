@@ -1,0 +1,4 @@
+import { GraduationCap } from "lucide-react";
+import { education } from "@/lib/data";
+import { SectionHeading } from "./SectionHeading";
+export function Education(){return <section id="education" className="section bg-white/50 dark:bg-black/5"><div className="container-site"><SectionHeading eyebrow="Education" title="Academic foundation."/><div className="grid gap-5 md:grid-cols-2">{education.map(e=><div key={e.title} className="card-ui p-6"><div className="flex gap-4"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-[#c9a24a]/15 text-[#c9a24a]"><GraduationCap/></span><div><p className="text-xs font-bold uppercase tracking-[.15em] text-[#c9a24a]">{e.period}</p><h3 className="mt-1 font-semibold">{e.title}</h3><p className="mt-1 text-sm text-[var(--muted)]">{e.school}</p><p className="mt-2 text-sm font-semibold text-[#16384f] dark:text-white">{e.grade}</p></div></div></div>)}</div></div></section>}
